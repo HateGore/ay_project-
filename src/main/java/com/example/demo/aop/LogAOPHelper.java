@@ -11,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import com.example.demo.board.Board;
+
 
 @Aspect
 @Component
@@ -98,8 +100,9 @@ public class LogAOPHelper {
 				if (paraValues[k] instanceof HttpServletRequest) {
 					values.append("HttpServletRequest, ");
 				}
+				
 				else {
-					//values.append(paraValues[k].toString() + ", ");
+					values.append(paraValues[k].toString() + ", ");
 				}
 			}
 			values.append("\n");

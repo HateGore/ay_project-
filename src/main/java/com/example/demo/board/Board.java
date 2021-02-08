@@ -147,7 +147,8 @@ public class Board {
 	@Override
 	public String toString() {
 		String rep = "";
-		if (reps.isEmpty()) {
+		
+		if (reps == null) {
 			rep = "NULL";
 		} else {
 			rep = reps.size() + "개의 rep을 가진 ArrayList";
