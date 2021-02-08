@@ -97,8 +97,9 @@ public class LogAOPHelper {
 			for (int k = 0; k < paraValues.length; k++) {
 				if (paraValues[k] instanceof HttpServletRequest) {
 					values.append("HttpServletRequest, ");
-				} else {
-					values.append(paraValues[k].toString() + ", ");
+				}
+				else {
+					//values.append(paraValues[k].toString() + ", ");
 				}
 			}
 			values.append("\n");
