@@ -39,7 +39,7 @@
           	<a class="nav-link" href="${ pageContext.request.contextPath }/member/logout">내정보수정</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="${ pageContext.request.contextPath }/mypage/mypage">회원탈퇴</a>
+          <a class="nav-link" href="${ pageContext.request.contextPath }/member/out">회원탈퇴</a>
         </li>
       </ul>
     </div>

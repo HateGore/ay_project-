@@ -21,7 +21,7 @@ var emailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[
 // 휴대폰 번호 정규식
 var telJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
 $(document).ready(function(){
-	$("#id").blur(function(){
+	$("#id").keyup(function(){
 		if(idJ.test($(this).val())){
 			$("#id_check").text('췍');
 			$('#id_check').css('color', 'green');
@@ -30,7 +30,7 @@ $(document).ready(function(){
 			$('#id_check').css('color', 'red');
 		}
 	});	
-	$("#password1").blur(function(){
+	$("#password1").keyup(function(){
 		if(pwdJ.test($(this).val())){
 			$("#pwd1_check").text('췍');
 			$('#pwd1_check').css('color', 'green');
@@ -39,16 +39,17 @@ $(document).ready(function(){
 			$('#pwd1_check').css('color', 'red');
 		}
 	});
-	$("#password2").blur(function(){
-		if(pwdJ.test($(this).val())){
+	$("#password2").keyup(function(){
+		if($("#password1").val() == $("#password2").val()){
 			$("#pwd2_check").text('췍');
 			$('#pwd2_check').css('color', 'green');
 		}else{
 			$("#pwd2_check").text('안댐');
 			$('#pwd2_check').css('color', 'red');
-		}
+			return;
+		};
 	});
-	$("#name").blur(function(){
+	$("#name").keyup(function(){
 		if(nameJ.test($(this).val())){
 			$("#name_check").text('췍');
 			$('#name_check').css('color', 'green');
@@ -57,7 +58,7 @@ $(document).ready(function(){
 			$('#name_check').css('color', 'red');
 		}
 	});
-	$("#tel").blur(function(){
+	$("#tel").keyup(function(){
 		if(telJ.test($(this).val())){
 			$("#tel_check").text('췍');
 			$('#tel_check').css('color', 'green');
@@ -66,7 +67,7 @@ $(document).ready(function(){
 			$('#tel_check').css('color', 'red');
 		}
 	});
-	$("#email").blur(function(){
+	$("#email").keyup(function(){
 		if(emailJ.test($(this).val())){
 			$("#email_check").text('췍');
 			$('#email_check').css('color', 'green');
@@ -75,10 +76,89 @@ $(document).ready(function(){
 			$('#email_check').css('color', 'red');
 		}
 	});
-	})
-</script>
-<script>
-	$(document).ready(function() {
+		$("#join").click(function() {			
+			if ($("#id").val()=="" ){
+				alert("아이디가 액션빔");	
+				return
+			} 
+			if (idJ.test($("#id").val())){
+				//정규 표현식과 일치하면 다음으로 넘김
+			} 
+			else {
+				alert("아이디 췍 띄우셈");
+				return
+			} 
+			if ($("#password1").val()==""){
+				alert("비밀번호가 액션빔");
+				return
+			} 
+			if (pwdJ.test($("#password1").val())){
+				//정규 표현식과 일치하면 다음으로 넘김
+			} 
+			else {
+				alert("비밀번호 췍 띄우셈");
+				return
+			} 
+			if ($("#password1").val() == $("#password2").val()){
+				//비밀번호 비교하고 일치하면 넘김
+			} 
+			else {
+				alert("비밀번호가 달라염");
+				return
+			}
+			if ($("#name").val()==""){
+				alert("이름이 액션빔");
+				return
+			}
+			if (nameJ.test($("#name").val())){
+				//정규 표현식과 일치하면 다음으로 넘김
+			} 
+			else {
+				alert("이름 췍 띄우셈");
+				return
+			} 
+			if ($("#birth").val()==""){
+				alert("생일이 액션빔");
+				return
+			}
+			if ($("#gender").val()==""){
+				alert("성별이 액션빔");
+				return
+			}
+			if ($("#address").val()==""){
+				alert("주소가 액션빔");
+				return
+			}
+			if ($("#tel").val()==""){
+				alert("전화번호가 액션빔");
+				return
+			}
+			if (telJ.test($("#tel").val())){
+				//정규 표현식과 일치하면 다음으로 넘김
+			} 
+			else {
+				alert("전화번호 췍 띄우셈");
+				return
+			} 
+			if ($("#email").val()==""){
+				alert("이메일이 액션빔");
+				return
+			}
+			if (emailJ.test($("#email").val())){
+				//정규 표현식과 일치하면 다음으로 넘김
+			} 
+			else {
+				alert("이메일 췍 띄우셈");
+				return
+			} 
+			if ($("#idResult").text().trim() == "사용가능") {
+				$("form").submit();
+			}
+			else {
+				alert("id 중복체크 하세여");
+			}
+		});
+		$(document).ready(function() {
 		$("#idCheck").click(function() {
 			$.post("/member/idCheck", {
 				id : $("#id").val()
@@ -86,51 +166,7 @@ $(document).ready(function(){
 				$("#idResult").text(data);
 			});
 		});
-		$("#join").click(function() {			
-			if ($("#id").val()=="" ){
-				alert("아이디가 액션빔");
-				return
-			} if (idJ.test($(this).val())){
-				$("#id_check").text('췍');
-				$('#id_check').css('color', 'green');
-			} if (idJ.test($(this).val())){
-				$("#id_check").text('안댐');
-				$('#id_check').css('color', 'red');
-			    alert("아이디 확인 점 하셈;");
-				return
-			} if ($("#password").val()==""){
-				alert("비밀번호가 액션빔");
-				return
-			}if(pwdJ.test($(this).val())){
-				$("#pwd1_check").text('췍');
-				$('#pwd1_check').css('color', 'green');
-			}if(pwdJ.test($(this).val())){
-				$("#pwd1_check").text('안댐');
-				$('#pwd1_check').css('color', 'red');
-			} if ($("#name").val()==""){
-				alert("이름이 액션빔");
-				return
-			} if ($("#birth").val()==""){
-				alert("생일이 액션빔");
-				return
-			} if ($("#gender").val()==""){
-				alert("성별이 액션빔");
-				return
-			} if ($("#address").val()==""){
-				alert("주소가 액션빔");
-				return
-			} if ($("#tel").val()==""){
-				alert("전화번호가 액션빔");
-				return
-			} if ($("#email").val()==""){
-				alert("이메일이 액션빔");
-				return
-			} if ($("#idResult").text().trim() == "사용가능") {
-				$("form").submit();
-			} else {
-				alert("id 중복체크 하세여");
-			}
-		});
+	});
 	});
 </script>
 <script>
@@ -336,7 +372,7 @@ $(document).ready(function(){
 				<span class="check_font" id="email_check"></span></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><input type="button" value="어서오고" id="join" onclick="go()"></td>
+				<td colspan="2" align="center"><input type="button" value="어서오고" id="join"></td>
 			</tr>
 
 
